@@ -1,7 +1,7 @@
 // import { apikey } from "./apikey";
 
 export const fetchPicOfTheDay = async day => {
-  const response = await fetch(`http://localhost:3000/api/v1/potd/${day}`);
+  const response = await fetch(`/api/v1/potd/${day}`);
   const data = await response.json();
   return data;
 };
