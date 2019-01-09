@@ -16,5 +16,6 @@ export default {
 .loading-message {
   text-align: center;
   font-family: "Verdana";
+  color: #f2f2f2;
 }
 </style>
