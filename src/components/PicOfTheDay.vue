@@ -1,7 +1,10 @@
 
 <template>
   <div class="pic-of-the-day">
-    <h1 class="header-text">space cat of the day</h1>
+    <header>
+      <div class="cat-logo"/>
+      <h1 class="header-text">space cat of the day</h1>
+    </header>
     <div class="potd-image" v-bind:style="{backgroundImage: 'url(' + pic.url + ')'}">
       <img class="cat-pic" v-bind:src="cat" alt="space cat">
     </div>
@@ -22,20 +25,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+header {
+  max-width: 480px;
+  margin: 1rem auto 2rem;
+  display: flex;
+  align-items: center;
+}
 .pic-of-the-day {
-  background: #f2f2f2;
+  background: #333;
   padding-top: 2rem;
+}
+.header-text {
+  max-width: 310px;
 }
 .header-text,
 .pic-title,
 .pic-date {
-  color: #333;
+  color: #f2f2f2;
   text-align: center;
   font-family: "Verdana";
 }
 .potd-image {
-  height: 400px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   background-size: cover;
   background-repeat: no-repeat;
   margin: auto;
@@ -47,5 +59,13 @@ export default {
 .cat-pic {
   max-width: 170px;
   max-height: 170px;
+}
+.cat-logo {
+  background: url("./images/logo.png");
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: auto;
 }
 </style>
