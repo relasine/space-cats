@@ -1,23 +1,29 @@
 <template>
   <div id="app">
     <PicOfTheDay v-if="pic" v-bind:cat="cat" v-bind:pic="pic"/>
+    <Loading v-if="!pic"/>
     <nav class="button-container">
       <button v-if="day < 30" v-on:click="backDay()">back one space cat</button>
+      <button v-if="day >= 30" class="disabled-btn">back one space cat</button>
       <button v-if="day > 0" v-on:click="forwardDay()">forward one space cat</button>
-      <button v-if="day !== 0" v-on:click="currentDay()">current space cat</button>
+      <button v-if="day === 0" class="disabled-btn">forward one space cat</button>
+      <button v-if="day !== 0" v-on:click="currentDay()">today's space cat</button>
+      <button v-if="day === 0" class="disabled-btn">today's space cat</button>
     </nav>
   </div>
 </template>
 
 <script>
 import PicOfTheDay from "./components/PicOfTheDay.vue";
+import Loading from "./components/Loading.vue";
 import { fetchPicOfTheDay } from "./utils/fetchCalls";
 import { catHelper } from "./utils/catHelper";
 
 export default {
   name: "app",
   components: {
-    PicOfTheDay
+    PicOfTheDay,
+    Loading
   },
   data() {
     return {
@@ -51,7 +57,6 @@ export default {
         const pic = await fetchPicOfTheDay(this.day);
         this.pic = pic;
       } catch (error) {
-        console.log(error);
         this.error = true;
       }
     }
@@ -65,11 +70,11 @@ body {
   padding: 0;
 }
 #app {
-  background: #f2f2f2;
-  height: 100vh;
+  background: #333;
+  min-height: 100vh;
 }
 nav {
-  width: 340px;
+  width: 34 0px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -78,11 +83,13 @@ nav {
 button {
   margin: 1rem auto;
   display: block;
-  border: 2px solid #333;
-  background: #f2f2f2;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  border: 2px solid #f2f2f2;
+  background: #333;
+  box-shadow: 1px 1px 1px #f2f2f2;
   transition: 0.2s;
   width: 150px;
+  color: #f2f2f2;
+  padding: 0.5rem 0;
 }
 
 button:focus,
@@ -96,5 +103,13 @@ button:active {
 
 button:hover {
   cursor: pointer;
+}
+
+.disabled-btn {
+  opacity: 0.2;
+}
+
+.button-container {
+  max-width: 600px;
 }
 </style>
